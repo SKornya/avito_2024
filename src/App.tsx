@@ -1,25 +1,46 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+
+import MainPage from './pages/MainPage';
+import ErrorPage from './pages/ErrorPage';
+
+import { routes } from './routes';
+import { ConfigProvider, Layout, theme } from 'antd';
+import { Content, Header } from 'antd/es/layout/layout';
+import AppHeader from './components/AppHeader';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
+
+  const themeSwitch = () => {
+    setIsDarkTheme(!isDarkTheme);
+  };
+
+  const router = createBrowserRouter([
+    {
+      path: routes.app.main,
+      element: <MainPage isDarkTheme={isDarkTheme} themeSwitch={themeSwitch} />,
+      errorElement: <ErrorPage />,
+    },
+  ]);
+
+  const { useToken } = theme;
+  const { token } = useToken();
+
+  useEffect(() => {
+    document.body.style.backgroundColor = token.colorBgContainer;
+  }, [token]);
+
+  console.log(isDarkTheme);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ConfigProvider
+      theme={{
+        algorithm: isDarkTheme ? theme.darkAlgorithm : theme.defaultAlgorithm,
+      }}
+    >
+      <RouterProvider router={router} />
+    </ConfigProvider>
   );
 }
 

@@ -1,9 +1,9 @@
 import { BASE_URL, routes } from '../routes';
-import { QueryOptions } from '../types';
+import { Movie, QueryOptions } from '../types';
 
 const token = process.env.REACT_APP_API_TOKEN;
 
-export const fetchFilms = async (options: QueryOptions) => {
+export const fetchFilms = async (options: QueryOptions): Promise<{ docs: Movie[] }> => {
   const { page, limit } = options;
   const params = new URLSearchParams();
   params.append('page', String(page));
@@ -28,5 +28,6 @@ export const fetchFilms = async (options: QueryOptions) => {
     if (error instanceof Error) {
       throw Error(error.message);
     }
+    throw Error;
   }
 };
