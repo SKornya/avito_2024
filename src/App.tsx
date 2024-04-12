@@ -4,10 +4,8 @@ import MainPage from './pages/MainPage';
 import ErrorPage from './pages/ErrorPage';
 
 import { routes } from './routes';
-import { ConfigProvider, Layout, theme } from 'antd';
-import { Content, Header } from 'antd/es/layout/layout';
-import AppHeader from './components/AppHeader';
-import { useEffect, useState } from 'react';
+import { ConfigProvider, theme } from 'antd';
+import { useState } from 'react';
 
 function App() {
   const [isDarkTheme, setIsDarkTheme] = useState<boolean>(true);
@@ -22,16 +20,12 @@ function App() {
       element: <MainPage isDarkTheme={isDarkTheme} themeSwitch={themeSwitch} />,
       errorElement: <ErrorPage />,
     },
+    {
+      path: `${routes.app.film}/:id`,
+      element: <></>,
+      errorElement: <ErrorPage />,
+    }
   ]);
-
-  const { useToken } = theme;
-  const { token } = useToken();
-
-  useEffect(() => {
-    document.body.style.backgroundColor = token.colorBgContainer;
-  }, [token]);
-
-  console.log(isDarkTheme);
 
   return (
     <ConfigProvider

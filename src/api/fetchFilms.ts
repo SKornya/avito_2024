@@ -1,9 +1,11 @@
 import { BASE_URL, routes } from '../routes';
 import { Movie, QueryOptions } from '../types';
 
-const token = process.env.REACT_APP_API_TOKEN;
+const token = process.env.TOKEN;
 
-export const fetchFilms = async (options: QueryOptions): Promise<{ docs: Movie[] }> => {
+export const fetchFilms = async (
+  options: QueryOptions
+): Promise<{ docs: Movie[], page: number, total: number, limit: number, pages: number }> => {
   const { page, limit } = options;
   const params = new URLSearchParams();
   params.append('page', String(page));

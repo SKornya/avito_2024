@@ -25,11 +25,23 @@ export interface Movie {
   ratingMpaa: string;
   shortDescription: string;
   description: string;
-  year: number;
   isSeries: boolean;
+  movieLength?: number;
+  seriesLength?: number;
+  year?: number;
+  releaseYears?: [
+    {
+      start: number;
+      end: number;
+    }
+  ]
 }
 
 export interface AppHeaderProps {
   isDarkTheme: boolean;
   themeSwitch: () => void;
+}
+
+export interface MovieCardProps {
+  movie: Movie;
 }

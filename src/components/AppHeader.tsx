@@ -2,13 +2,13 @@ import {
   MoonOutlined,
   SunOutlined,
 } from '@ant-design/icons';
-import { Flex, Image, Switch } from 'antd';
+import { Flex, Switch } from 'antd';
 import { FunctionComponent } from 'react';
 import { AppHeaderProps } from '../types';
 import Text from 'antd/es/typography/Text';
 import { Link } from 'react-router-dom';
 
-const AppHeader: FunctionComponent<AppHeaderProps> = ({ isDarkTheme, themeSwitch }) => {
+const AppHeader: FunctionComponent<AppHeaderProps> = ({ themeSwitch }) => {
   return (
     <Flex justify="space-between" align="center" style={{ width: '100%' }}>
       <Text
